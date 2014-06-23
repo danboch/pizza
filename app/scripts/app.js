@@ -1,4 +1,3 @@
-
 /**
  * @ngdoc overview
  * @name pizzaApp
@@ -38,15 +37,19 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: 'OrderCtrl',
       resolve: {
         order: function ($stateParams, $firebase) {
-
-          return $firebase(new Firebase("https://sizzling-fire-926.firebaseio.com/pizza/orders/"+$stateParams.id));
+          return $firebase(new Firebase("https://sizzling-fire-926.firebaseio.com/pizza/orders/" + $stateParams.id));
         }
       }
     })
-    .state('summary', {
-      url: "/summary",
+    .state('orders.summary', {
+      url: "/{id}/summary",
       templateUrl: 'views/order-summary.html',
-      controller: 'SummaryCtrl'
+      controller: 'SummaryCtrl',
+      resolve: {
+        order: function ($stateParams, $firebase) {
+          return $firebase(new Firebase("https://sizzling-fire-926.firebaseio.com/pizza/orders/" + $stateParams.id));
+        }
+      }
     })
     .state('login', {
       url: "/login",

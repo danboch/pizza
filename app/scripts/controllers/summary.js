@@ -7,10 +7,11 @@
  * # TestowyCtrl
  * Controller of the pizzaApp
  */
-app.controller('SummaryCtrl', function ($scope, $firebase) {
-  var order = new Firebase("https://sizzling-fire-926.firebaseio.com/pizza/orders/1");
+app.controller('SummaryCtrl', function ($scope, order) {
 
-  $scope.order = $firebase(order);
+  console.log('summary');
+
+  $scope.order = order;
 
   $scope.order.$on('value', function () {
     var numberOfPicas = 0;
