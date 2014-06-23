@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10455e23-5e99-4a48-abc3-66709b7a1210" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/order.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/orders.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/app.js" afterPath="$PROJECT_DIR$/app/scripts/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/pizza.html" afterPath="$PROJECT_DIR$/app/views/pizza.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/controllers/testowy.js" afterPath="$PROJECT_DIR$/app/scripts/controllers/testowy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pizza.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -497,12 +494,12 @@
       <changelist id="10455e23-5e99-4a48-abc3-66709b7a1210" name="Default" comment="" />
       <created>1403525043791</created>
       <updated>1403525043791</updated>
-      <workItem from="1403525044195" duration="5266000" />
+      <workItem from="1403525044195" duration="5524000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5266000" />
+    <option name="totallyTimeSpent" value="5524000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-2" y="-1" width="1924" height="1057" extended-state="6" />

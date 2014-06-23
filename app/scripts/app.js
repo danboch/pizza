@@ -31,7 +31,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: "/login",
       templateURL: "views/login.html",
       controller: 'LoginCtrl'
-    })
+    });
 
 
 })
