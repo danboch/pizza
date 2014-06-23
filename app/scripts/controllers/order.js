@@ -16,7 +16,7 @@ app.controller('OrderCtrl', function ($scope, order, $cookies)
     function switchPiece(piece){
         if (piece.key == "") {
             piece.key = username;
-        } else if (piece.key === username) {
+        } else if (piece.key === username && canModifyOrder()) {
             piece.key = "";
         }
 
