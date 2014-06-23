@@ -8,15 +8,15 @@
         {{ pizza.name }}
         {{ pizza.pieces }}
 
-        <button ng-click="addPiece(pizza)">weź kawałek</button>
-        <button ng-click="removePiece(pizza)">usuń kawałek</button>
-        <button ng-click="removePizza(pizza)">usuń pizze</button>
+        <button ng-click="addPiece(pizza)" >weź kawałek</button>
+        <button ng-click="removePiece(pizza)" ng-show="order.status == 'open'">usuń kawałek</button>
+        <button ng-click="removePizza(pizza)" ng-show="order.status == 'open'">usuń pizze</button>
 
     </div>
 
     <div>
         <input type="text" ng-model="newPizzaName" placeholder="Nazwa pizzy"/>
-        <button ng-click="addPizza(newPizzaName)">dodaj pizze</button>
+        <button ng-click="addPizza(newPizzaName)" ng-show="order.status == 'open'">dodaj pizze</button>
     </div>
 
     <div>
@@ -26,9 +26,13 @@
     </div>
 
 
+<button ng-click="lockOrder()" ng-show="order.status == 'open'">Lock order</button>
+<button ng-click="markOrdered()" ng-show="order.status == 'locked'">Mark as ordered</button>
+<input type="time" id="exampleInput" name="input" ng-model="order.deliveryTime" ng-show="order.status == 'locked'"
+       placeholder="HH:mm" min="08:00" max="17:00" required />
+
+
 
 
 </div>
 
-
-<ng-view></ng-view>

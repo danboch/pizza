@@ -1,6 +1,8 @@
 app.controller('OrderCtrl', function ($scope, order, $cookies) {
 
   var username = $cookies.pizzauser;
+  
+  order.deliveryTime = new Date(order.deliveryTime);
 
   $scope.order = order;
 
@@ -35,6 +37,7 @@ app.controller('OrderCtrl', function ($scope, order, $cookies) {
   }
 
   $scope.removePiece = function (pizza) {
+	if (!canModifyOrder()) return;  
 
     if (!pizza.hasOwnProperty('pieces')) {
       pizza.pieces = {};
@@ -49,7 +52,8 @@ app.controller('OrderCtrl', function ($scope, order, $cookies) {
   }
 
   $scope.addPizza = function (pizzaName) {
-
+	if (!canModifyOrder()) return;  
+	if (!order.hasOwnProperty('pizzas')) order.pizzas = [];
     order.pizzas.push({name: pizzaName});
 
     order.$update(order);
@@ -58,6 +62,7 @@ app.controller('OrderCtrl', function ($scope, order, $cookies) {
 
   $scope.removePizza = function(pizza){
 
+	if (!canModifyOrder()) return;  
     var index = order.pizzas.indexOf(pizza);
 
     order.pizzas.splice(index,1);
@@ -65,9 +70,24 @@ app.controller('OrderCtrl', function ($scope, order, $cookies) {
     order.$update(order);
 
   }
+  
+  function canModifyOrder() {
+	  return order.status == "open";
+  }
 
   $scope.updatePrice = function(){
     order.$update(order);
+  }
+  
+  $scope.lockOrder = function() {
+	  order.status = "locked";
+	  order.$update(order);
+  }
+  
+  $scope.markOrdered = function() {
+	  order.status = "ordered";
+	  
+	  order.$update(order);
   }
 
 });

@@ -14,11 +14,14 @@ app.controller('OrdersCtrl', function ($scope, $firebase, $state, orders) {
       $scope.addNew = function() {    	  
         var newOrder = {
         	owner: $scope.username,
-        	date: new Date()
+        	date: new Date(),
+        	status: "open",
+        	pizzas: [],
+        	deliveryTime: new Date()
         };
         
         $scope.orders.$add(newOrder).then(function(ref) {
-        	$state.transitionTo('order', { id: ref.name() });
+        	$state.transitionTo('orders.show', { id: ref.name() });
         });
       };
   });
