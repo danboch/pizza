@@ -8,6 +8,12 @@
  * Controller of the pizzaApp
  */
 angular.module('pizzaApp')
-  .controller('TestowyCtrl', function ($scope) {
-    $scope.test = "dupa";
+  .controller('TestowyCtrl', function ($scope, $firebase) {
+      var orders = new Firebase("https://sizzling-fire-926.firebaseio.com/pizza/orders");
+      // Automatically syncs everywhere in realtime
+      $scope.orders = $firebase(orders);
+
+
+
+
   });
