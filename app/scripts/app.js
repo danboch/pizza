@@ -8,5 +8,6 @@
  *
  * Main module of the application.
  */
-angular
-  .module('pizzaApp', []);
+
+var app = angular
+  .module('pizzaApp', [ 'ui.router']);
