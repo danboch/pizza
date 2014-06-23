@@ -2,11 +2,31 @@
 
 <div class="pizzas">
 
-    <div ng-repeat="pizza in order.pizzas">
+
+    <!-- todo error jak sie wyawli-->
+    <div ng-repeat="pizza in order.pizzas track by $index " ng-if="pizza && pizza.name">
         {{ pizza.name }}
         {{ pizza.pieces }}
 
+        <button ng-click="addPiece(pizza)">weź kawałek</button>
+        <button ng-click="removePiece(pizza)">usuń kawałek</button>
+        <button ng-click="removePizza(pizza)">usuń pizze</button>
+
     </div>
+
+    <div>
+        <input type="text" ng-model="newPizzaName" placeholder="Nazwa pizzy"/>
+        <button ng-click="addPizza(newPizzaName)">dodaj pizze</button>
+    </div>
+
+    <div>
+        <label>Łączna cena</label>
+        <input type="text" ng-model="order.price" placeholder="Łączna cena"/>
+        <button ng-click="updatePrice()">Zapisz cenę</button>
+    </div>
+
+
+
 
 </div>
 
