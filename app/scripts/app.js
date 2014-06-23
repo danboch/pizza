@@ -31,7 +31,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: "/login",
       templateUrl: "views/login.html",
       controller: 'LoginCtrl'
-    });
+    })
 
 });
 
@@ -40,28 +40,11 @@ app.run(
 
     $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams) {
 
-
-      if(toState.name !== login && !$cookies.pizzauser){
+      if(toState.name !== 'login' && !$cookies.pizzauser){
         $state.go('login');
+      }else{
+        $rootScope.username = $cookies.pizzauser;
       }
-//
-//
-//
-//
-//      }
-
-//      $rootScope.user =
-
-//      var alert = $rootScope.alert;
-//
-//      if (alert && alert.old) {
-//        $rootScope.alert = null;
-//      }
-//
-//      if (alert && !alert.old) {
-//        alert.old = true;
-//      }
-
 
     });
   });
