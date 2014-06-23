@@ -10,7 +10,7 @@
  */
 
 var app = angular
-  .module('pizzaApp', [ "firebase", 'ui.router']);
+  .module('pizzaApp', [ "firebase", 'ui.router', 'ngCookies']);
 
 
 app.config(function ($stateProvider, $urlRouterProvider) {
@@ -33,5 +33,35 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: 'LoginCtrl'
     });
 
+});
 
-})
+app.run(
+  function ($rootScope, $cookies, $state) {
+
+    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams) {
+
+
+      if(toState.name !== login && !$cookies.pizzauser){
+        $state.go('login');
+      }
+//
+//
+//
+//
+//      }
+
+//      $rootScope.user =
+
+//      var alert = $rootScope.alert;
+//
+//      if (alert && alert.old) {
+//        $rootScope.alert = null;
+//      }
+//
+//      if (alert && !alert.old) {
+//        alert.old = true;
+//      }
+
+
+    });
+  });
