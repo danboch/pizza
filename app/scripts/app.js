@@ -17,15 +17,32 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
   // Now set up the states
   $stateProvider
+
     .state('orders', {
-      url: "/orders",
+      abstract: true,
+      url: '/orders',
+      template: '<ui-view></ui-view>',
+      resolve: {
+        orders: function ($firebase) {
+          return $firebase(new Firebase("https://sizzling-fire-926.firebaseio.com/pizza/orders"));
+        }
+      }
+    })
+    .state('orders.index', {
+      url: "/",
       templateUrl: 'views/orders.html',
       controller: "OrdersCtrl"
     })
-    .state('order', {
-      url: "/orders/{id}",
+    .state('orders.show', {
+      url: "/{id}",
       templateUrl: 'views/order.html',
-      controller: 'OrderCtrl'
+      controller: 'OrderCtrl',
+      resolve: {
+        order: function ($stateParams, $firebase) {
+
+          return $firebase(new Firebase("https://sizzling-fire-926.firebaseio.com/pizza/orders/"+$stateParams.id));
+        }
+      }
     })
     .state('login', {
       url: "/login",
@@ -40,9 +57,9 @@ app.run(
 
     $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams) {
 
-      if(toState.name !== 'login' && !$cookies.pizzauser){
+      if (toState.name !== 'login' && !$cookies.pizzauser) {
         $state.go('login');
-      }else{
+      } else {
         $rootScope.username = $cookies.pizzauser;
       }
 

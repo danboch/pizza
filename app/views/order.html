@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<h1>order</h1>
 
-</body>
-</html>
+<div class="pizzas">
+
+    <div ng-repeat="pizza in order.pizzas">
+        {{ pizza.name }}
+        {{ pizza.pieces }}
+
+    </div>
+
+</div>
+
+{{ order.owner }}

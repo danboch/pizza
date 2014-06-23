@@ -7,11 +7,9 @@
  * # TestowyCtrl
  * Controller of the pizzaApp
  */
-angular.module('pizzaApp')
-  .controller('OrdersCtrl', function ($scope, $firebase, $state) {
-      var orders = new Firebase("https://sizzling-fire-926.firebaseio.com/pizza/orders");
-      
-      $scope.orders = $firebase(orders);
+app.controller('OrdersCtrl', function ($scope, $firebase, $state, orders) {
+
+      $scope.orders = orders;
       
       $scope.addNew = function() {    	  
         var newOrder = {
