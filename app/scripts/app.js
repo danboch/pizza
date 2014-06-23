@@ -19,17 +19,17 @@ app.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('orders', {
       url: "/orders",
-      templateURL: 'views/orders.html',
+      templateUrl: 'views/orders.html',
       controller: "OrdersCtrl"
     })
     .state('order.show', {
       url: "/{id}",
-      templateURL: 'views/order.html',
+      templateUrl: 'views/order.html',
       controller: 'OrderCtrl'
     })
     .state('login', {
       url: "/login",
-      templateURL: "views/login.html",
+      templateUrl: "views/login.html",
       controller: 'LoginCtrl'
     });
 
