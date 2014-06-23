@@ -1,4 +1,3 @@
-'use strict';
 
 /**
  * @ngdoc overview
@@ -43,6 +42,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
           return $firebase(new Firebase("https://sizzling-fire-926.firebaseio.com/pizza/orders/"+$stateParams.id));
         }
       }
+    })
+    .state('summary', {
+      url: "/summary",
+      templateUrl: 'views/order-summary.html',
+      controller: 'SummaryCtrl'
     })
     .state('login', {
       url: "/login",
