@@ -28,5 +28,8 @@
 
 <button ng-click="lockOrder()" ng-show="order.status == 'open'">Lock order</button>
 <button ng-click="markOrdered()" ng-show="order.status == 'locked'">Mark as ordered</button>
-<input type="time" id="exampleInput" name="input" ng-model="order.deliveryTime" ng-show="order.status == 'locked'"
-       placeholder="HH:mm" min="08:00" max="17:00" required/>
+<input id="exampleInput" name="input" ng-model="minutesToDelivery" ng-show="order.status == 'locked'" required/> minutes
+       
+      {{ timeToDelivery() }}
+      {{ showMap() }}
+      {{ pizzaDelivered() }}
