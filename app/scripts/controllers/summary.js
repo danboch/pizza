@@ -19,7 +19,9 @@ app.controller('SummaryCtrl', function ($scope, order) {
     angular.forEach($scope.order.pizzas, function (value, key) {
       numberOfPicas++;
       angular.forEach(value.pieces, function (value, key) {
-        piecesPerPerson[key] = (piecesPerPerson[key] ? piecesPerPerson[key] : 0) + value;
+    	if(value.key != "") {
+          piecesPerPerson[value.key] = (piecesPerPerson[value.key] ? piecesPerPerson[value.key] : 0) + value.y;
+    	}
       });
 
     });
