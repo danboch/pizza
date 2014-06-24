@@ -173,9 +173,8 @@ app.controller('OrderCtrl', function ($scope, order, $cookies)
     $scope.markOrdered = function ()
     {
         order.status = "ordered";
-        
+        order.deliveryTime = new Date(new Date().getTime() + $scope.minutesToDelivery*60*1000);
         order.$update(order);
-        
     }
     
     $scope.timeToDelivery = function()

@@ -69,17 +69,13 @@
 
             <input class='form-control input-lg' id="exampleInput" name="input" ng-model="minutesToDelivery"
                    ng-show="order.status == 'locked'" required/> <span class="input-group-addon">minutes left</span>
+                   
         </div>
 
         <button class="btn btn-success btn-lg" ng-click="lockOrder()" ng-show="order.status == 'open'">Lock order</button>
 
     </div>
 </div>
-
-
-<!--{{ timeToDelivery() }}-->
-<!--{{ showMap() }}-->
-<!--{{ pizzaDelivered() }}-->
 
 
 <hr>
@@ -93,18 +89,19 @@
     </table>
 
 
-    <div ng-if="showMap()" id="map" style="width: 700px; height: 500px"></div>
+    <div ng-show="showMap()" >
+    	Pizza will be delivered in {{ timeToDelivery()/60 | number: 0 }} minutes.
+    	<div id="controls">
+      		<button ng-click="start()">Gdzie jest moja pica ?</button>
+    	</div>
+    </div>
+    {{ showMap() }}
+    <div ng-show="showMap()" style="width: 700px; height: 500px">	
+    	<div id="map" style="width: 700px; height: 500px"></div>
+	</div>
 
-
-    <script type="text/javascript">
-        //<![CDATA[
-
-
-        // This Javascript is based on code provided by the
-        // Community Church Javascript Team
-        // http://www.bisphamchurch.org.uk/
-        // http://econym.org.uk/gmap/
-
-        //]]>
-    </script>
+<div ng-show="pizzaDelivered()">
+	<h3>Pizza delivered!</h3>
+</div>
+    
 </div>
