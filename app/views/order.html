@@ -4,6 +4,22 @@
 
 <div class="form-group" ng-show="order.status == 'open'">
 
+    <label>Pizzeria</label>
+
+    <div class="input-group">
+
+        <input class='form-control input-lg' type="text" ng-model="order.pizzeria" placeholder="nazwa pizzerii"/>
+
+          <span class="input-group-btn">
+            <button class="btn btn-success btn-lg" ng-click="updateOrder()">
+                ustaw pizzerie
+            </button>
+          </span>
+    </div>
+</div>
+
+<div class="form-group" ng-show="order.status == 'open'">
+
     <label>Nowa pizza</label>
 
     <div class="input-group">
