@@ -1,7 +1,7 @@
 app.controller('OrderCtrl', function ($scope, order, $cookies)
 {
     var username = $cookies.pizzauser;
-
+    
     $scope.$on('elementClick.directive', function (angularEvent, event)
     {
         var pieces = angularEvent.targetScope.data;
@@ -164,14 +164,32 @@ app.controller('OrderCtrl', function ($scope, order, $cookies)
     $scope.lockOrder = function ()
     {
         order.status = "locked";
+        order.deliveryTime = new Date(new Date().getTime() + $scope.minutesToDelivery*60*1000);
         order.$update(order);
     }
+    
+    $scope.minutesToDelivery = 40;
 
     $scope.markOrdered = function ()
     {
         order.status = "ordered";
-
+        
         order.$update(order);
+    }
+    
+    $scope.timeToDelivery = function()
+    {
+    	return (new Date(order.deliveryTime).getTime()-new Date().getTime())/1000;	
+    }
+    
+    $scope.showMap = function()
+    {
+    	return order.status == 'ordered' && $scope.timeToDelivery() > 0;
+    }
+    
+    $scope.pizzaDelivered = function()
+    {
+    	return order.status == 'ordered' && $scope.timeToDelivery() <= 0;
     }
 
 });
