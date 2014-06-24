@@ -88,19 +88,21 @@
         </tr>
     </table>
 
+    <div ng-show="showMap()">
 
-    <div ng-show="showMap()" >
-    	Pizza will be delivered in {{ timeToDelivery()/60 | number: 0 }} minutes.
+
+    	<h2>Pizza will be delivered in <strong>{{ timeToDelivery()/60 | number: 0 }} minutes</strong>.</h2>
     	<div id="controls">
-      		<button ng-click="start()">Gdzie jest moja pica ?</button>
+      		<button class='btn btn-success btn-lg' ng-click="start()">Gdzie jest moja pica ?</button>
     	</div>
     </div>
-    <div ng-show="showMap()" style="width: 700px; height: 500px">	
+    <hr/>
+    <div ng-show="showMap()" style="width: 700px; height: 500px">
     	<div id="map" style="width: 700px; height: 500px"></div>
 	</div>
 
 <div ng-show="pizzaDelivered()">
-	<h3>Pizza delivered!</h3>
+	<h2>Pizza delivered!</h2>
 </div>
     
 </div>
