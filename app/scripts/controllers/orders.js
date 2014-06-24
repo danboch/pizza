@@ -24,4 +24,8 @@ app.controller('OrdersCtrl', function ($scope, $firebase, $state, orders) {
         	$state.transitionTo('orders.show', { id: ref.name() });
         });
       };
+      
+      $scope.go = function(key) {
+    	  $state.transitionTo('orders.show', { id: key });  
+      };
   });
