@@ -83,6 +83,10 @@ body {
 .svg{
     width: auto;
 }
+
+.pizzas{
+    text-align: center;
+}
 .pizza{
     display: inline-block;
     width: 430px;
