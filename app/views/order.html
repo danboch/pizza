@@ -33,3 +33,32 @@
       {{ timeToDelivery() }}
       {{ showMap() }}
       {{ pizzaDelivered() }}
+      
+      
+      
+      
+      
+<hr>
+      
+      <div>Total price: {{ price }} zł, price per piece: {{ pricePerPiece }} zł
+<table>
+	<tr ng-repeat="item in summary">
+		<td>{{ item.person }}: {{ item.number }} pieces = {{ item.price }} zł</td>
+	</tr>
+</table>
+
+    
+    <div ng-if="showMap()" id="map" style="width: 700px; height: 500px"></div>
+
+
+    <script type="text/javascript">
+    //<![CDATA[
+
+
+    // This Javascript is based on code provided by the
+    // Community Church Javascript Team
+    // http://www.bisphamchurch.org.uk/   
+    // http://econym.org.uk/gmap/
+
+    //]]>
+    </script></div>
