@@ -16,7 +16,7 @@ angular.module('pizzaApp')
       $cookies.pizzauser = username;
       $rootScope.username = username
 
-      $state.go('orders');
+      $state.go('orders.index');
 
     }
 
