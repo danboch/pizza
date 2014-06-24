@@ -1,73 +1,177 @@
-app.controller('OrderCtrl', function ($scope, order, $cookies) {
+app.controller('OrderCtrl', function ($scope, order, $cookies)
+{
+    var username = $cookies.pizzauser;
 
-  var username = $cookies.pizzauser;
+    $scope.$on('elementClick.directive', function (angularEvent, event)
+    {
+        var pieces = angularEvent.targetScope.data;
 
-  $scope.order = order;
+        angularEvent.targetScope.data[event.index] = switchPiece(pieces[event.index]);
 
-  function totalPieces(pieces) {
+        $scope.$apply();
 
-    var total = 0;
-
-    angular.forEach(pieces, function (piece) {
-      total += piece;
+        order.$update(order);
     });
 
-    return total;
-  }
+    function switchPiece(piece){
+        if (piece.key == "") {
+            piece.key = username;
+        } else if (piece.key === username && canModifyOrder()) {
+            piece.key = "";
+        }
 
-  $scope.addPiece = function (pizza) {
-
-    if (!pizza.hasOwnProperty('pieces')) {
-      pizza.pieces = {};
+        return piece;
     }
 
-    var pieces = pizza.pieces;
-
-    if (totalPieces(pieces) >= 8) return;
-
-    if (!angular.isUndefined(pieces[username])) {
-      pieces[username]++;
-    } else {
-      pieces[username] = 1;
+    function buildPieces()
+    {
+        var pieces = [];
+        for (var i = 0; i < 8; i++) {
+            pieces.push({key: "", y: 1});
+        }
+        return pieces;
     }
 
-    order.$update(order);
-  }
+    $scope.pizzaIsEaten = function(pizza){
+        for(var i=0; i<8; i++){
+            if(pizza.pieces[i].key == "") return false;
+        }
 
-  $scope.removePiece = function (pizza) {
-
-    if (!pizza.hasOwnProperty('pieces')) {
-      pizza.pieces = {};
+        return true;
     }
 
-    var pieces = pizza.pieces;
+    $scope.colorFunction = function ()
+    {
+        return function (d, i)
+        {
 
-    if (!angular.isUndefined(pieces[username]) && pieces[username] > 0) {
-      pieces[username]--;
-      order.$update(order);
+            var takenChunkColor = 'rgba(255, 140 , 0, 0.1)',
+                chunkColor = 'rgb(255, 140 , 0)';
+
+            if (d.data.key === "") {
+                return chunkColor;
+            } else {
+                return takenChunkColor;
+            }
+        };
     }
-  }
 
-  $scope.addPizza = function (pizzaName) {
+    $scope.xFunction = function ()
+    {
+        return function (d)
+        {
+            return d.key;
+        };
+    }
 
-    order.pizzas.push({name: pizzaName});
+    $scope.yFunction = function ()
+    {
+        return function (d)
+        {
+            return d.y;
+        };
+    }
 
-    order.$update(order);
 
-  }
+    var username = $cookies.pizzauser;
 
-  $scope.removePizza = function(pizza){
+    order.deliveryTime = new Date(order.deliveryTime);
 
-    var index = order.pizzas.indexOf(pizza);
+    $scope.order = order;
 
-    order.pizzas.splice(index,1);
+    function totalPieces(pieces)
+    {
 
-    order.$update(order);
+        var total = 0;
 
-  }
+        angular.forEach(pieces, function (piece)
+        {
+            total += piece;
+        });
 
-  $scope.updatePrice = function(){
-    order.$update(order);
-  }
+        return total;
+    }
+
+    $scope.addPiece = function (pizza)
+    {
+
+        if (!pizza.hasOwnProperty('pieces')) {
+            pizza.pieces = {};
+        }
+
+        var pieces = pizza.pieces;
+
+        if (totalPieces(pieces) >= 8) return;
+
+        if (!angular.isUndefined(pieces[username])) {
+            pieces[username]++;
+        } else {
+            pieces[username] = 1;
+        }
+
+        order.$update(order);
+    }
+
+    $scope.removePiece = function (pizza)
+    {
+        if (!canModifyOrder()) return;
+
+        if (!pizza.hasOwnProperty('pieces')) {
+            pizza.pieces = {};
+        }
+
+        var pieces = pizza.pieces;
+
+        if (!angular.isUndefined(pieces[username]) && pieces[username] > 0) {
+            pieces[username]--;
+            order.$update(order);
+        }
+    }
+
+    $scope.addPizza = function (pizzaName)
+    {
+        if (!canModifyOrder()) return;
+
+        if (!order.hasOwnProperty('pizzas')) order.pizzas = [];
+        order.pizzas.push({name: pizzaName, pieces: buildPieces()});
+
+        order.$update(order);
+
+    }
+
+    $scope.removePizza = function (pizza)
+    {
+
+        if (!canModifyOrder()) return;
+        var index = order.pizzas.indexOf(pizza);
+
+        order.pizzas.splice(index, 1);
+
+        order.$update(order);
+
+    }
+
+    function canModifyOrder()
+    {
+        return order.status == "open";
+    }
+
+    $scope.updatePrice = function ()
+    {
+        order.$update(order);
+    }
+
+    $scope.lockOrder = function ()
+    {
+        order.status = "locked";
+        order.$update(order);
+    }
+
+    $scope.markOrdered = function ()
+    {
+        order.status = "ordered";
+
+        order.$update(order);
+    }
 
 });

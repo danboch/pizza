@@ -1,34 +1,32 @@
-<h1>order</h1>
+<h1>Order</h1>
 
-<div class="pizzas">
-
-
-    <!-- todo error jak sie wyawli-->
-    <div ng-repeat="pizza in order.pizzas track by $index " ng-if="pizza && pizza.name">
-        {{ pizza.name }}
-        {{ pizza.pieces }}
-
-        <button ng-click="addPiece(pizza)">weź kawałek</button>
-        <button ng-click="removePiece(pizza)">usuń kawałek</button>
-        <button ng-click="removePizza(pizza)">usuń pizze</button>
-
-    </div>
-
-    <div>
-        <input type="text" ng-model="newPizzaName" placeholder="Nazwa pizzy"/>
-        <button ng-click="addPizza(newPizzaName)">dodaj pizze</button>
-    </div>
-
-    <div>
-        <label>Łączna cena</label>
-        <input type="text" ng-model="order.price" placeholder="Łączna cena"/>
-        <button ng-click="updatePrice()">Zapisz cenę</button>
-    </div>
-
-
-
-
+<div>
+    <input type="text" ng-model="newPizzaName" placeholder="Nazwa pizzy"/>
+    <button ng-click="addPizza(newPizzaName)" ng-show="order.status == 'open'">dodaj pizze</button>
 </div>
 
+<div>
+    <label>Łączna cena</label>
+    <input type="text" ng-model="order.price" placeholder="Łączna cena"/>
+    <button ng-click="updatePrice()">Zapisz cenę</button>
+</div>
 
-<ng-view></ng-view>
+<hr/>
+
+<div class="pizzas">
+    <!-- todo error jak sie wyawli-->
+    <div class="pizza well" ng-repeat="pizza in order.pizzas track by $index " ng-if="pizza && pizza.name" ng-class="{'pizza-success': pizzaIsEaten(pizza)}">
+        <h3>{{ pizza.name }} <button class="btn btn-danger btn-xs delete" ng-click="removePizza(pizza)" ng-show="order.status == 'open'">x</button></h3>
+        <nvd3-pie-chart interactive="true" objectequality="true" data="pizza.pieces" width="400" height="400" x="xFunction()" y="yFunction()"
+                        showlabels="true" color="colorFunction()">
+        </nvd3-pie-chart>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<hr/>
+
+<button ng-click="lockOrder()" ng-show="order.status == 'open'">Lock order</button>
+<button ng-click="markOrdered()" ng-show="order.status == 'locked'">Mark as ordered</button>
+<input type="time" id="exampleInput" name="input" ng-model="order.deliveryTime" ng-show="order.status == 'locked'"
+       placeholder="HH:mm" min="08:00" max="17:00" required/>
