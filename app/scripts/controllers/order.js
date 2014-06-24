@@ -130,6 +130,7 @@ app.controller('OrderCtrl', function ($scope, order, $cookies)
 
     $scope.addPizza = function (pizzaName)
     {
+    	if (pizzaName == null || pizzaName == "") return;
         if (!canModifyOrder()) return;
 
         if (!order.hasOwnProperty('pizzas')) order.pizzas = [];
@@ -241,7 +242,7 @@ app.controller('OrderCtrl', function ($scope, order, $cookies)
           var poly;
           var eol;
           var car = new GIcon();
-          car.image = "http://www.hollywoodreporter.com/sites/default/files/2014/03/Rolling_Hasselhoff_Prop_a_l.jpg"
+          car.image = "/images/pizzaicon.jpg"
           car.iconSize = new GSize(122, 80);
           car.iconAnchor = new GPoint(0, 0);
           var marker;
@@ -306,7 +307,7 @@ app.controller('OrderCtrl', function ($scope, order, $cookies)
           });
 
           $scope.start = function () {
-            var startpoint = "rynek, kraków";
+            var startpoint = "ul. Wysłouchów 48/A5, Kraków";
             var endpoint = "kamieńskiego 51, kraków";
             dirn.loadFromWaypoints([startpoint, endpoint], {getPolyline: true, getSteps: true});
           }
