@@ -13,6 +13,8 @@ var app = angular
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 
+  $urlRouterProvider.otherwise('/orders/');
+
   // Now set up the states
   $stateProvider
 
@@ -21,9 +23,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: '/orders',
       template: '<ui-view></ui-view>',
       resolve: {
-        orders: function ($firebase) {
+        orders: ['$firebase', function ($firebase) {
           return $firebase(new Firebase("https://sizzling-fire-926.firebaseio.com/pizza/orders"));
-        }
+        }]
       }
     })
     .state('orders.index', {
@@ -36,9 +38,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: 'views/order.html',
       controller: 'OrderCtrl',
       resolve: {
-        order: function ($stateParams, $firebase) {
+        order: ['$stateParams', '$firebase', function ($stateParams, $firebase) {
           return $firebase(new Firebase("https://sizzling-fire-926.firebaseio.com/pizza/orders/" + $stateParams.id));
-        }
+        }]
       }
     })
     .state('orders.summary', {
@@ -46,9 +48,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: 'views/order-summary.html',
       controller: 'SummaryCtrl',
       resolve: {
-        order: function ($stateParams, $firebase) {
+        order: ['$stateParams', '$firebase', function ($stateParams, $firebase) {
           return $firebase(new Firebase("https://sizzling-fire-926.firebaseio.com/pizza/orders/" + $stateParams.id));
-        }
+        }]
       }
     })
     .state('login', {
