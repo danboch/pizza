@@ -153,7 +153,14 @@ app.controller('OrderCtrl', function ($scope, order, $cookies) {
 
   $scope.lockOrder = function () {
     order.status = "locked";
+    order.lockedBy = $scope.username;
     order.deliveryTime = new Date(new Date().getTime() + $scope.minutesToDelivery * 60 * 1000);
+    order.$update(order);
+  }
+
+  $scope.unlock = function() {
+    order.status = "open";
+    order.deliveryTime = null;
     order.$update(order);
   }
 

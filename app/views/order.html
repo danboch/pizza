@@ -40,7 +40,7 @@
     </div>
 </div>
 
-<hr ng-show="order.status != 'ordered'"/>
+<hr ng-show="order.status == 'open'"/>
 
 <div class="pizzas">
     <!-- todo error jak sie wyawli-->
@@ -63,20 +63,22 @@
 
 <div class="row">
 
-    <div class="col-lg-6">
+    <div class="col-lg-6" style="height: 50px;">
+    	<div style="padding-top: 12px; color: #808080; font-style: italic;" ng-show="order.status != 'open'">Zablokowane przez {{ order.lockedBy }}</div>
     </div>
     <div class="col-lg-6" style="text-align: right;">
         <div class="input-group" ng-show="order.status == 'locked'">
           <span class="input-group-btn">
-            <button class="btn btn-success btn-lg" ng-click="markOrdered()">Oznacz jako zamówione</button>
+          	<button class="btn btn-warning btn-lg" ng-click="unlock()" ng-show="order.lockedBy == username">Odblokuj</button>
+            <button class="btn btn-success btn-lg" ng-click="markOrdered()">Zamówione!</button>
           </span>
 
             <input class='form-control input-lg' id="exampleInput" name="input" ng-model="minutesToDelivery"
-                   ng-show="order.status == 'locked'" required/> <span class="input-group-addon">minutes left</span>
+                   ng-show="order.status == 'locked'" required/> <span class="input-group-addon">minut</span>
                    
         </div>
 
-        <button class="btn btn-success btn-lg" ng-click="lockOrder()" ng-show="order.status == 'open'" ng-disabled="!order.pizzas || order.pizzas.length == 0">Zablokuj zamówienie</button>
+        <button class="btn btn-success btn-lg" ng-click="lockOrder()" ng-show="order.status == 'open'" ng-disabled="!order.pizzas || order.pizzas.length == 0">Zablokuj</button>
 
     </div>
 </div>
