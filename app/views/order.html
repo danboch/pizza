@@ -6,7 +6,7 @@
 <span ng-show="order.owner" style="color: #808080; font-style: italic;" >stworzone przez <strong>{{ order.owner }}</strong> w chwili {{ order.date | date: 'dd/MM/yyyy HH:mm'}}</span>
 </div>
 
-<hr/>
+<hr />
 
 <div class="form-group" ng-show="order.status == 'open'">
 
@@ -40,22 +40,7 @@
     </div>
 </div>
 
-
-<div class="form-group">
-
-    <label>Łączna cena</label>
-
-    <div class="input-group">
-
-        <input class='form-control input-lg' type="text" ng-model="order.price" placeholder="Łączna cena"/>
-
-          <span class="input-group-btn">
-            <button class="btn btn-success btn-lg" ng-click="updatePrice()" ng-disabled="!order.price">Zapisz cenę</button>
-          </span>
-    </div>
-</div>
-
-<hr/>
+<hr ng-show="order.status != 'ordered'"/>
 
 <div class="pizzas">
     <!-- todo error jak sie wyawli-->
@@ -74,7 +59,7 @@
     <div class="clearfix"></div>
 </div>
 
-<hr/>
+<hr />
 
 <div class="row">
 
@@ -97,10 +82,25 @@
 </div>
 
 
-<hr>
+<hr ng-show="order.status != 'ordered'"/>
 
-<h1 style="margin-top: 50px; margin-bottom: 30px;">Podsumowanie</h1>
-<div><h4>Cena całkowita: <strong>{{ price }} zł</strong>, cena za kawałek: <strong>{{ pricePerPiece }} zł</strong></h4>
+<h1 style="margin-bottom: 30px;">Podsumowanie</h1>
+<div class="form-group"style="padding-bottom: 20px;">
+
+    <label>Łączna cena</label>
+
+    <div class="input-group">
+
+        <input class='form-control input-lg' type="text" ng-model="order.price" placeholder="Łączna cena"/>
+
+          <span class="input-group-btn">
+            <button class="btn btn-success btn-lg" ng-click="updatePrice()" ng-disabled="!order.price">Zapisz cenę</button>
+          </span>
+    </div>
+</div>
+<div>
+
+<h4>Cena całkowita: <strong>{{ price }} zł</strong>, cena za kawałek: <strong>{{ pricePerPiece }} zł</strong></h4>
     <table class="table">
         <tr ng-repeat="item in summary">
             <td>{{ item.person }}: {{ item.number }} kawałki <span ng-show="{{ price }}">= {{ item.price }} zł</span></td>
