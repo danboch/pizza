@@ -78,9 +78,7 @@
     <div class="col-lg-6" style="text-align: right;">
         <div class="input-group" ng-show="order.status == 'locked'">
           <span class="input-group-btn">
-            <button class="btn btn-success btn-lg" ng-click="markOrdered()">Mark as
-                ordered
-            </button>
+            <button class="btn btn-success btn-lg" ng-click="markOrdered()">Oznacz jako zamówione</button>
           </span>
 
             <input class='form-control input-lg' id="exampleInput" name="input" ng-model="minutesToDelivery"
@@ -88,7 +86,7 @@
                    
         </div>
 
-        <button class="btn btn-success btn-lg" ng-click="lockOrder()" ng-show="order.status == 'open'">Lock order</button>
+        <button class="btn btn-success btn-lg" ng-click="lockOrder()" ng-show="order.status == 'open'">Zablokuj zamówienie</button>
 
     </div>
 </div>
@@ -97,17 +95,19 @@
 <hr>
 
 <h1 style="margin-top: 50px; margin-bottom: 30px;">Podsumowanie</h1>
-<div><h4>Total price: <strong>{{ price }} zł</strong>, price per piece: <strong>{{ pricePerPiece }} zł</strong></h4>
+<div><h4>Cena całkowita: <strong>{{ price }} zł</strong>, cena za kawałek: <strong>{{ pricePerPiece }} zł</strong></h4>
     <table class="table">
         <tr ng-repeat="item in summary">
-            <td>{{ item.person }}: {{ item.number }} pieces = {{ item.price }} zł</td>
+            <td>{{ item.person }}: {{ item.number }} kawałki <span ng-show="{{ price }}">= {{ item.price }} zł</span></td>
         </tr>
     </table>
 
-    <div ng-show="showMap()">
-
-
-    	<h2>Pizza will be delivered in <strong>{{ timeToDelivery()/60 | number: 0 }} minutes</strong>.</h2>
+    <div ng-if="showMap()">
+    	<h2>Pizza zostanie dostarczona za 
+    		<timer countdown="timeToDelivery()" max-time-unit="'minute'" interval="1000">
+    			<strong>{{mminutes}} minut{{minuteS}}, {{sseconds}} sekund{{sekundS}}.</strong>
+    		</timer> 
+    	</h2>
     	<div id="controls">
       		<button class='btn btn-success btn-lg' ng-click="start()">Gdzie jest moja pica ?</button>
     	</div>
@@ -118,7 +118,7 @@
 	</div>
 
 <div ng-show="pizzaDelivered()">
-	<h2>Pizza delivered!</h2>
+	<h2>Pizza dostarczona!</h2>
 </div>
     
 </div>

@@ -8,7 +8,7 @@
  */
 
 var app = angular
-  .module('pizzaApp', [ "firebase", 'ui.router', 'ngCookies', 'nvd3ChartDirectives']);
+  .module('pizzaApp', [ "firebase", 'ui.router', 'ngCookies', 'nvd3ChartDirectives', 'timer']);
 
 
 app.config(function ($stateProvider, $urlRouterProvider) {

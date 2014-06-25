@@ -281,6 +281,7 @@ app.controller('OrderCtrl', function ($scope, order, $cookies) {
         var startpoint = "ul. Wysłouchów 48/A5, Kraków";
         var endpoint = "kamieńskiego 51, kraków";
         dirn.loadFromWaypoints([startpoint, endpoint], {getPolyline: true, getSteps: true});
+        $scope.mapVisible = true;
       }
 
     }
