@@ -8,11 +8,11 @@
 
     <div class="input-group">
 
-        <input class='form-control input-lg' type="text" ng-model="order.pizzeria" placeholder="nazwa pizzerii"/>
+        <input class='form-control input-lg' type="text" ng-model="order.pizzeria" placeholder="Nazwa pizzerii"/>
 
           <span class="input-group-btn">
-            <button class="btn btn-success btn-lg" ng-click="updateOrder()">
-                ustaw pizzerie
+            <button class="btn btn-success btn-lg" ng-click="updateOrder()" ng-disabled="!order.pizzeria">
+                Ustaw pizzerie
             </button>
           </span>
     </div>
@@ -27,9 +27,8 @@
         <input class='form-control input-lg' type="text" ng-model="newPizzaName" placeholder="Nazwa pizzy"/>
 
           <span class="input-group-btn">
-            <button class="btn btn-success btn-lg" ng-click="addPizza(newPizzaName)">
-                dodaj
-                pizze
+            <button class="btn btn-success btn-lg" ng-click="addPizza(newPizzaName)" ng-disabled="!newPizzaName">
+                <span class="glyphicon glyphicon-plus"></span> Dodaj pizze
             </button>
           </span>
     </div>
@@ -45,7 +44,7 @@
         <input class='form-control input-lg' type="text" ng-model="order.price" placeholder="Łączna cena"/>
 
           <span class="input-group-btn">
-            <button class="btn btn-success btn-lg" ng-click="updatePrice()">Zapisz cenę</button>
+            <button class="btn btn-success btn-lg" ng-click="updatePrice()" ng-disabled="!order.price">Zapisz cenę</button>
           </span>
     </div>
 </div>
@@ -86,7 +85,7 @@
                    
         </div>
 
-        <button class="btn btn-success btn-lg" ng-click="lockOrder()" ng-show="order.status == 'open'">Zablokuj zamówienie</button>
+        <button class="btn btn-success btn-lg" ng-click="lockOrder()" ng-show="order.status == 'open'" ng-disabled="!order.pizzas || order.pizzas.length == 0">Zablokuj zamówienie</button>
 
     </div>
 </div>

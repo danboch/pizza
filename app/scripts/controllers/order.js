@@ -127,6 +127,8 @@ app.controller('OrderCtrl', function ($scope, order, $cookies) {
     order.pizzas.push({name: pizzaName, pieces: buildPieces()});
 
     order.$update(order);
+    
+    $scope.newPizzaName = null;
 
   }
 
